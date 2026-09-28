@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cầu Nối Bản Mây</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f4ed;
+            color: #222;
+        }
+
+        /* NAVIGATION */
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: #365b45;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: #365b45;
+        }
+
+
+        /* HERO */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 10% 70px;
+            background:
+                linear-gradient(
+                    rgba(247,244,237,0.86),
+                    rgba(247,244,237,0.96)
+                );
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #dfe9df;
+            color: #365b45;
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            margin: 0 0 20px;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: auto;
+            font-size: 20px;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        .hero-buttons {
+            margin-top: 35px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        button,
+        .button {
+            padding: 14px 24px;
+            border-radius: 9px;
+            border: none;
+            font-size: 15px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .primary {
+            background: #365b45;
+            color: white;
+        }
+
+        .secondary {
+            background: white;
+            color: #365b45;
+            border: 1px solid #365b45;
+        }
+
+
+        /* COMMON SECTION */
+
+        section {
+            padding: 90px 8%;
+        }
+
+        .section-title {
+            max-width: 750px;
+            margin-bottom: 45px;
+        }
+
+        .section-title span {
+            color: #7b927d;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .section-title h2 {
+            font-size: 40px;
+            margin: 10px 0;
+        }
+
+        .section-title p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+
+        /* PROBLEM */
+
+        .problem {
+            background: white;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .problem-card {
+            padding: 30px;
+            background: #f7f4ed;
+            border-radius: 14px;
+        }
+
+        .problem-card h3 {
+            margin-top: 0;
+            color: #365b45;
+        }
+
+        .problem-card p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+
+        /* SOLUTION */
+
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .solution-card {
+            background: white;
+            border-radius: 16px;
+            padding: 35px;
+            min-height: 250px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .number {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #365b45;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .solution-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+
+        /* CHATBOT */
+
+        .chat-section {
+            background: #2f4d3a;
+            color: white;
+        }
+
+        .chat-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .chat-description h2 {
+            font-size: 42px;
+        }
+
+        .chat-description p {
+            line-height: 1.8;
+            color: #d9e2dc;
+        }
+
+        .chatbox {
+            background: white;
+            color: #222;
+            border-radius: 18px;
+            overflow: hidden;
+            min-height: 480px;
+        }
+
+        .chat-header {
+            background: #eef3ef;
+            padding: 18px 22px;
+            border-bottom: 1px solid #ddd;
+            font-weight: bold;
+        }
+
+        .messages {
+            height: 330px;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 12px 15px;
+            margin-bottom: 12px;
+            border-radius: 12px;
+            line-height: 1.5;
+        }
+
+        .bot {
+            background: #eef3ef;
+        }
+
+        .user {
+            background: #365b45;
+            color: white;
+            margin-left: auto;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid #ddd;
+            gap: 10px;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        .chat-input button {
+            background: #365b45;
+            color: white;
+        }
+
+
+        /* TRAINING */
+
+        .training {
+            background: white;
+        }
+
+        .training-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .training-card {
+            padding: 25px;
+            border: 1px solid #ddd;
+            border-radius: 14px;
+        }
+
+        .training-card span {
+            color: #7b927d;
+            font-size: 13px;
+        }
+
+        .training-card h3 {
+            margin: 12px 0;
+        }
+
+        .training-card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+
+        /* JOURNEY */
+
+        .journey-list {
+            max-width: 850px;
+        }
+
+        .journey-item {
+            display: flex;
+            gap: 25px;
+            margin-bottom: 35px;
+        }
+
+        .journey-step {
+            min-width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #365b45;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .journey-text h3 {
+            margin-top: 0;
+        }
+
+        .journey-text p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+
+        /* IMPACT */
+
+        .impact {
+            background: #e8eee8;
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .impact-card {
+            background: white;
+            padding: 35px;
+            text-align: center;
+            border-radius: 14px;
+        }
+
+        .impact-number {
+            font-size: 42px;
+            color: #365b45;
+            font-weight: bold;
+        }
+
+
+        /* JOIN */
+
+        .join {
+            text-align: center;
+        }
+
+        .join h2 {
+            font-size: 42px;
+        }
+
+        .join p {
+            color: #666;
+            max-width: 650px;
+            margin: 0 auto 30px;
+            line-height: 1.7;
+        }
+
+
+        /* FOOTER */
+
+        footer {
+            padding: 40px 8%;
+            background: #1f3127;
+            color: #ccc;
+            text-align: center;
+            font-size: 13px;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 900px) {
+
+            nav ul {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 45px;
+            }
+
+            .problem-grid,
+            .solution-grid,
+            .training-grid,
+            .impact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chat-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+
+<body>
+
+
+<!-- NAVIGATION -->
+
+<nav>
+
+    <div class="logo">
+        Cầu Nối Bản Mây
+    </div>
+
+    <ul>
+
+        <li>
+            <a href="#problem">Vấn đề</a>
+        </li>
+
+        <li>
+            <a href="#solution">Giải pháp</a>
+        </li>
+
+        <li>
+            <a href="#chatbot">Chatbot</a>
+        </li>
+
+        <li>
+            <a href="#training">Đào tạo</a>
+        </li>
+
+        <li>
+            <a href="#impact">Tác động</a>
+        </li>
+
+    </ul>
+
+</nav>
+
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="tag">
+            AI × Giáo dục × Cộng đồng
+        </div>
+
+        <h1>
+            Cầu Nối Bản Mây
+        </h1>
+
+        <p>
+            Một hệ sinh thái học tập số hướng tới hỗ trợ
+            phụ nữ và trẻ em gái H'Mông tiếp cận ngôn ngữ,
+            AI và những cơ hội mới trong kỷ nguyên số.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="#chatbot"
+               class="button primary">
+                Thử chatbot
+            </a>
+
+            <a href="#solution"
+               class="button secondary">
+                Tìm hiểu dự án
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- PROBLEM -->
+
+<section
+    class="problem"
+    id="problem"
+>
+
+    <div class="section-title">
+
+        <span>
+            VÌ SAO DỰ ÁN RA ĐỜI?
+        </span>
+
+        <h2>
+            Công nghệ đã đến gần hơn,
+            nhưng không phải ai cũng có thể sử dụng nó.
+        </h2>
+
+        <p>
+            Cầu Nối Bản Mây được xây dựng từ nhu cầu
+            học tập, giao tiếp và phát triển sinh kế
+            của cộng đồng địa phương.
+        </p>
+
+    </div>
+
+
+    <div class="problem-grid">
+
+        <div class="problem-card">
+
+            <h3>
+                Rào cản ngôn ngữ
+            </h3>
+
+            <p>
+                Người dùng có thể gặp khó khăn khi
+                chuyển đổi giữa tiếng H'Mông,
+                tiếng Việt và tiếng Anh.
+            </p>
+
+        </div>
+
+
+        <div class="problem-card">
+
+            <h3>
+                Khoảng cách số
+            </h3>
+
+            <p>
+                Có điện thoại thông minh không đồng nghĩa
+                với việc có khả năng tận dụng AI
+                cho học tập và sinh kế.
+            </p>
+
+        </div>
+
+
+        <div class="problem-card">
+
+            <h3>
+                Học rồi nhưng khó duy trì
+            </h3>
+
+            <p>
+                Nhiều chương trình đào tạo ngắn hạn
+                thiếu công cụ giúp người học tiếp tục
+                thực hành sau khi chương trình kết thúc.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- SOLUTION -->
+
+<section id="solution">
+
+    <div class="section-title">
+
+        <span>
+            GIẢI PHÁP
+        </span>
+
+        <h2>
+            Không chỉ là một website.
+        </h2>
+
+        <p>
+            Dự án kết hợp công nghệ,
+            đào tạo và cộng đồng để tạo ra
+            một hệ sinh thái học tập có thể duy trì lâu dài.
+        </p>
+
+    </div>
+
+
+    <div class="solution-grid">
+
+
+        <div class="solution-card">
+
+            <div class="number">
+                1
+            </div>
+
+            <h3>
+                Hmong Dictionary AI
+            </h3>
+
+            <p>
+                Chatbot hỗ trợ người dùng tra cứu,
+                học từ vựng và luyện giao tiếp
+                giữa tiếng H'Mông, tiếng Việt và tiếng Anh.
+            </p>
+
+        </div>
+
+
+        <div class="solution-card">
+
+            <div class="number">
+                2
+            </div>
+
+            <h3>
+                Chương trình đào tạo
+            </h3>
+
+            <p>
+                4 buổi thực hành giúp người học
+                hiểu AI, viết prompt,
+                sử dụng Internet an toàn
+                và sáng tạo nội dung.
+            </p>
+
+        </div>
+
+
+        <div class="solution-card">
+
+            <div class="number">
+                3
+            </div>
+
+            <h3>
+                Đại sứ bản địa
+            </h3>
+
+            <p>
+                Người trẻ tại địa phương được đào tạo
+                để hỗ trợ cộng đồng,
+                duy trì việc học
+                và lan tỏa kiến thức.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- CHATBOT -->
+
+<section
+    class="chat-section"
+    id="chatbot"
+>
+
+    <div class="chat-wrapper">
+
+        <div class="chat-description">
+
+            <h2>
+                Thử Hmong Dictionary AI
+            </h2>
+
+            <p>
+                Đây là phiên bản demo.
+                Bạn có thể nhập một câu tiếng Việt
+                để thử cách chatbot hỗ trợ
+                giao tiếp trong tình huống du lịch.
+            </p>
+
+            <p>
+                Phiên bản hoàn chỉnh có thể phát triển
+                thêm voice message,
+                từ vựng theo chủ đề
+                và bài học ngắn mỗi ngày.
+            </p>
+
+        </div>
+
+
+        <div class="chatbox">
+
+            <div class="chat-header">
+                ☁ Hmong Dictionary AI
+            </div>
+
+
+            <div
+                class="messages"
+                id="messages"
+            >
+
+                <div class="message bot">
+
+                    Xin chào 👋
+
+                    <br><br>
+
+                    Hãy thử hỏi:
+
+                    <br>
+
+                    “Tôi muốn chào khách du lịch bằng tiếng Anh.”
+
+                </div>
+
+            </div>
+
+
+            <div class="chat-input">
+
+                <input
+                    id="chatInput"
+                    type="text"
+                    placeholder="Nhập câu hỏi..."
+                >
+
+                <button onclick="sendMessage()">
+                    Gửi
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- TRAINING -->
+
+<section
+    class="training"
+    id="training"
+>
+
+    <div class="section-title">
+
+        <span>
+            CHƯƠNG TRÌNH HỌC
+        </span>
+
+        <h2>
+            4 buổi để biến AI
+            thành một công cụ gần gũi.
+        </h2>
+
+    </div>
+
+
+    <div class="training-grid">
+
+
+        <div class="training-card">
+
+            <span>
+                BUỔI 01
+            </span>
+
+            <h3>
+                Làm quen với AI
+            </h3>
+
+            <p>
+                AI là gì và có thể hỗ trợ
+                chúng ta trong cuộc sống như thế nào?
+            </p>
+
+        </div>
+
+
+        <div class="training-card">
+
+            <span>
+                BUỔI 02
+            </span>
+
+            <h3>
+                Hỏi AI đúng cách
+            </h3>
+
+            <p>
+                Học cách viết câu hỏi
+                và prompt đơn giản để nhận
+                câu trả lời hữu ích.
+            </p>
+
+        </div>
+
+
+        <div class="training-card">
+
+            <span>
+                BUỔI 03
+            </span>
+
+            <h3>
+                An toàn số
+            </h3>
+
+            <p>
+                Nhận biết thông tin sai,
+                bảo vệ dữ liệu cá nhân
+                và sử dụng AI có trách nhiệm.
+            </p>
+
+        </div>
+
+
+        <div class="training-card">
+
+            <span>
+                BUỔI 04
+            </span>
+
+            <h3>
+                Sáng tạo cùng AI
+            </h3>
+
+            <p>
+                Tạo hình ảnh, nội dung
+                và câu chuyện để giới thiệu
+                văn hóa và sản phẩm địa phương.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- USER JOURNEY -->
+
+<section>
+
+    <div class="section-title">
+
+        <span>
+            HÀNH TRÌNH NGƯỜI DÙNG
+        </span>
+
+        <h2>
+            Từ lần đầu tiếp cận
+            đến khi có thể hỗ trợ người khác.
+        </h2>
+
+    </div>
+
+
+    <div class="journey-list">
+
+
+        <div class="journey-item">
+
+            <div class="journey-step">
+                1
+            </div>
+
+            <div class="journey-text">
+
+                <h3>
+                    Tiếp cận
+                </h3>
+
+                <p>
+                    Người học được giới thiệu về AI
+                    qua những tình huống quen thuộc.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="journey-item">
+
+            <div class="journey-step">
+                2
+            </div>
+
+            <div class="journey-text">
+
+                <h3>
+                    Học có hướng dẫn
+                </h3>
+
+                <p>
+                    Tham gia chương trình đào tạo
+                    và thực hành trực tiếp cùng người hướng dẫn.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="journey-item">
+
+            <div class="journey-step">
+                3
+            </div>
+
+            <div class="journey-text">
+
+                <h3>
+                    Tự học
+                </h3>
+
+                <p>
+                    Tiếp tục sử dụng chatbot,
+                    luyện từ vựng và tra cứu
+                    trong các tình huống thực tế.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="journey-item">
+
+            <div class="journey-step">
+                4
+            </div>
+
+            <div class="journey-text">
+
+                <h3>
+                    Kết nối cộng đồng
+                </h3>
+
+                <p>
+                    Chia sẻ kinh nghiệm,
+                    hỗ trợ nhau và tham gia
+                    cộng đồng học tập.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="journey-item">
+
+            <div class="journey-step">
+                5
+            </div>
+
+            <div class="journey-text">
+
+                <h3>
+                    Trao quyền
+                </h3>
+
+                <p>
+                    Những người có kinh nghiệm
+                    có thể trở thành đại sứ bản địa
+                    và tiếp tục hỗ trợ người mới.
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- IMPACT -->
+
+<section
+    class="impact"
+    id="impact"
+>
+
+    <div class="section-title">
+
+        <span>
+            MỤC TIÊU THÍ ĐIỂM
+        </span>
+
+        <h2>
+            Tác động không dừng lại
+            ở một khóa học.
+        </h2>
+
+    </div>
+
+
+    <div class="impact-grid">
+
+
+        <div class="impact-card">
+
+            <div class="impact-number">
+                200+
+            </div>
+
+            <p>
+                Người dùng thường xuyên
+            </p>
+
+        </div>
+
+
+        <div class="impact-card">
+
+            <div class="impact-number">
+                10
+            </div>
+
+            <p>
+                Đại sứ bản địa
+            </p>
+
+        </div>
+
+
+        <div class="impact-card">
+
+            <div class="impact-number">
+                4
+            </div>
+
+            <p>
+                Buổi đào tạo thực hành
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- JOIN -->
+
+<section class="join">
+
+    <h2>
+        Cùng nối những con đường mới.
+    </h2>
+
+    <p>
+        Cầu Nối Bản Mây hướng tới xây dựng
+        một cộng đồng nơi công nghệ không tạo thêm khoảng cách,
+        mà trở thành công cụ giúp mỗi người
+        có thêm lựa chọn cho tương lai.
+    </p>
+
+    <button
+        class="primary"
+        onclick="joinProject()"
+    >
+        Tôi muốn tham gia
+    </button>
+
+</section>
+
+
+
+<footer>
+
+    © 2026 Cầu Nối Bản Mây
+
+    <br><br>
+
+    AI × Education × Community
+
+</footer>
+
+
+
+<script>
+
+    function sendMessage() {
+
+        const input =
+            document.getElementById("chatInput");
+
+        const messages =
+            document.getElementById("messages");
+
+        const text =
+            input.value.trim();
+
+
+        if (text === "") {
+            return;
+        }
+
+
+        const userMessage =
+            document.createElement("div");
+
+        userMessage.className =
+            "message user";
+
+        userMessage.innerText =
+            text;
+
+        messages.appendChild(
+            userMessage
+        );
+
+
+        input.value = "";
+
+
+        setTimeout(function() {
+
+            const botMessage =
+                document.createElement("div");
+
+            botMessage.className =
+                "message bot";
+
+
+            if (
+                text.toLowerCase().includes("chào")
+                ||
+                text.toLowerCase().includes("hello")
+            ) {
+
+                botMessage.innerHTML =
+                    "Bạn có thể nói:<br><br><b>Hello! Welcome to our village.</b><br><br>Nghĩa là:<br>Xin chào! Chào mừng bạn đến với bản của chúng tôi.";
+
+            }
+
+            else if (
+                text.toLowerCase().includes("cảm ơn")
+            ) {
+
+                botMessage.innerHTML =
+                    "Trong tiếng Anh, bạn có thể nói:<br><br><b>Thank you very much.</b>";
+
+            }
+
+            else {
+
+                botMessage.innerHTML =
+                    "Đây hiện là bản demo của Hmong Dictionary AI ☁️<br><br>Phiên bản hoàn chỉnh sẽ có thể hỗ trợ dịch, học từ vựng và luyện giao tiếp.";
+
+            }
+
+
+            messages.appendChild(
+                botMessage
+            );
+
+
+            messages.scrollTop =
+                messages.scrollHeight;
+
+        }, 500);
+
+    }
+
+
+
+    document
+        .getElementById("chatInput")
+        .addEventListener(
+            "keydown",
+            function(event) {
+
+                if (event.key === "Enter") {
+                    sendMessage();
+                }
+
+            }
+        );
+
+
+
+    function joinProject() {
+
+        alert(
+            "Cảm ơn bạn đã quan tâm đến Cầu Nối Bản Mây!"
+        );
+
+    }
+
+</script>
+
+
+</body>
+
+</html>
